@@ -17,9 +17,6 @@
 	var usersStorage = {
 	  fetch: function () {
 	    var usuarios = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-	    usuarios.forEach(function (todo, index) {
-	      todo.id = index
-	    });
 	    return usuarios;
 	  },
 	  save: function (usuarios) {
