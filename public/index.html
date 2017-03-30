@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>BootCamp Nivel 2</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+
+  <div class="col-xs-12">
+    <h4 class="text-center">Bootcamp Nivel 2</h4>
+  </div>
+
+  <div class="col-xs-6">
+
+    <h4 class="text-center">LocalStorage</h4>
+    <form>
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
+      <div class="form-group">
+        <label for="lastname">Apellido</label>
+        <input type="text" class="form-control" id="lastname" required>
+      </div>
+      <div class="form-group">
+        <button type="" href="#!" class="btn btn-primary" id="btnAdd"><i class="fa fa-plus" aria-hidden="true"></i> Agregar</button>
+        <a href="#!" class="btn btn-primary" id="btnClear"><i class="fa fa-eraser" aria-hidden="true"></i> Limpiar</a>
+      </div>
+    </form>
+
+    <script type="text/x-template" id="modal-template">
+      <transition name="modal">
+        <div class="modal-mask">
+          <div class="modal-wrapper">
+            <div class="modal-container">
+
+              <div class="modal-header">
+                <slot name="header">
+                  default header
+                </slot>
+              </div>
+
+              <div class="modal-body">
+                <slot name="body">
+                  No hay usuarios en el LocalStorage
+                </slot>
+              </div>
+
+              <div class="modal-footer">
+                <button class="modal-default-button" @click="$emit('close')">
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </script>
+
+    <!-- app -->
+    <div id="app">
+      <button id="show-modal" @click="showModal = true" class="btn btn-info"><i class="fa fa-users" aria-hidden="true"></i> Ver lista de usuarios</button>
+      <!-- use the modal component, pass in the prop -->
+      <modal v-if="showModal" @close="showModal = false">
+
+        <h3 slot="header">Lista de usuarios</h3>
+        <ul slot="body" v-if="items.length > 0" class="list-group">
+          <li v-for="item in items" class="list-group-item"><i class="glyphicon glyphicon-name"></i>
+            {{ item.name }} {{item.lastname}}
+          </li>
+        </ul>
+      </modal>
+    </div>
+  </div>
+
+  <div class="col-xs-6">
+    <h4 class="text-center">Canvas</h4>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
